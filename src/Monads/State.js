@@ -11,8 +11,10 @@ const State = state => ({
       const [a, newState] = state(x)
       return f(a).runState(newState)
     }),
-  // runState :: State s a => s a b ~> x -> s a c
+  // runState :: State s  => s a b ~> x -> s a c
   runState: x => state(x),
+  // inspect ::  State s  => s a b ~> () -> String
+  inspect: () => `State(${state})`,
 })
 
 State.pure = x => State(s => [x, s])

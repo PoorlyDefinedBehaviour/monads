@@ -7,7 +7,7 @@ const IO = fn => ({
   flatten: fn,
   // unsafeRun :: IO t => t a ~> a
   unsafeRun: fn,
-  // inspect :: () -> String
+  // inspect :: IO i => i a ~> () -> String
   inspect: () => `IO(${fn.name})`,
 })
 

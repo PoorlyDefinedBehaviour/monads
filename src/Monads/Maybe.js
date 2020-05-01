@@ -9,7 +9,7 @@ Maybe.Just = x => ({
   flatMap: f => f(x),
   // flatten :: Functor f => f (f a) ~> f a
   flatten: () => x,
-  // inspect :: () -> String
+  // inspect :: Just j => j a ~> () -> String
   inspect: () => `Just(${x})`,
 })
 
@@ -20,7 +20,7 @@ Maybe.Nothing = x => ({
   flatMap: _f => Maybe.Nothing(x),
   // flatten :: Functor f => f (f a) ~> f a
   flatten: () => x,
-  // inspect :: () -> String
+  // inspect :: Nothing n => n a ~> () -> String
   inspect: () => `Nothing(${x})`,
 })
 
