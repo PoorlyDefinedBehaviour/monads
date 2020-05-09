@@ -28,3 +28,4 @@ double x = x * 2
 
 main = do 
   print (double . double <$> head [1, 2, 3])
+  print (double . double <$> head [])
