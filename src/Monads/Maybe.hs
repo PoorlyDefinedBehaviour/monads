@@ -1,5 +1,3 @@
-module Main where 
-
 import Prelude hiding (head, Maybe (..))
 
 data Maybe a = Nothing | Just a deriving (Show)
@@ -9,7 +7,7 @@ instance Functor Maybe where
   fmap _ Nothing = Nothing
 
 instance Applicative Maybe where
-  pure = return
+  pure x = Just x
   (Just f) <*> (Just x) = Just (f x)
   Nothing <*> _ = Nothing
   _ <*> Nothing = Nothing
@@ -17,7 +15,7 @@ instance Applicative Maybe where
 instance Monad Maybe where 
   Just x >>= f = f x
   Nothing >>= _ = Nothing
-  return x = Just x
+  return = pure
 
 head :: [a] -> Maybe a
 head (x : xs) = Just x
