@@ -18,12 +18,13 @@ instance Monad Maybe where
   return = pure
 
 head :: [a] -> Maybe a
-head (x : xs) = Just x
+head (x : _) = Just x
 head [] = Nothing
 
 double :: Int -> Int
 double x = x * 2
 
+main :: IO ()
 main = do 
   print (double . double <$> head [1, 2, 3])
   print (double . double <$> head [])

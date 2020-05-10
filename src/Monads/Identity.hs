@@ -10,7 +10,7 @@ instance Applicative Identity where
   -- pure :: Identity i => a -> i a
   pure = Identity
   -- (<*>) :: Identity i => i (a -> b) -> i a -> i b
-  (Identity f) <*> id = fmap f id
+  (Identity f) <*> x = fmap f x
   -- (*>) :: Identity i => i a -> i b -> i b
   _ *> x = x
   -- (<*) :: Identity i => i a -> i b -> i a
@@ -30,6 +30,7 @@ double x = x * 2
 foo :: Int -> Identity Int
 foo x = (Identity . double) x
 
+main :: IO ()
 main = do
   print (20 <$ Identity 10)
 
