@@ -6,20 +6,20 @@ append Nil ys = ys
 append (Cons x xs) ys = Cons x (append xs ys)
 
 instance Functor List where
-  -- fmap :: (a -> b) -> List a -> List b
+  -- fmap :: List l => (a -> b) -> l a -> l b
   fmap _ Nil = Nil
   fmap f (Cons x xs) = Cons (f x) (fmap f xs)
 
 instance Applicative List where
-  -- pure :: a -> List a
+  -- pure :: List l => a -> l a
   pure x = Cons x Nil
-  -- (<*>) :: List (a -> b) -> List a -> List b
+  -- (<*>) :: List l => (a -> b) -> l a -> l b
   _ <*> Nil = Nil
   Nil <*> _ = Nil
   (Cons f fs) <*> xs = (fmap f xs) `append` (fs <*> xs)
 
 instance Monad List where
-  -- return :: a -> List a
+  -- return :: List l => a -> l a
   return = pure
   (Cons x Nil) >>= f = f x
   (Cons x xs) >>= f = (f x) `append` (xs >>= f)
