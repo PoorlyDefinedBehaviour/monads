@@ -4,6 +4,10 @@ import Maybe from "./Monads/Maybe"
 import State from "./Monads/State"
 import Identity from "./Monads/Identity"
 import Either from "./Monads/Either"
+import Reader from "./Monads/Reader"
+
+// eslint-disable-next-line no-sequences
+const tap = f => x => (f(x), x)
 
 console.log("--- IO ---")
 
@@ -50,3 +54,14 @@ Either.Left("hello world")
     () => "oops",
     x => x
   ) |> console.log
+
+console.log("--- Reader ---")
+
+const greetName = name => Reader(config => `${config.greeting} ${name}`)
+
+const surround = input =>
+  Reader(config => `${config.surround}${input}${config.surround}`)
+
+const render = name => greetName(name).flatMap(surround)
+
+render("john doe").run({ greeting: "Hello", surround: "~" }) |> console.log
