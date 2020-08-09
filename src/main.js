@@ -6,9 +6,6 @@ import Identity from "./Monads/Identity"
 import Either from "./Monads/Either"
 import Reader from "./Monads/Reader"
 
-// eslint-disable-next-line no-sequences
-const tap = f => x => (f(x), x)
-
 console.log("--- IO ---")
 
 const log = x => IO(() => console.log(x))
