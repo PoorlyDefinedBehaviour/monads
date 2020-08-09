@@ -5,6 +5,10 @@ import State from "./Monads/State"
 import Identity from "./Monads/Identity"
 import Either from "./Monads/Either"
 import Reader from "./Monads/Reader"
+import { fmap } from "./functor"
+
+// show :: Show s => s a -> String
+const show = s => s.inspect()
 
 console.log("--- IO ---")
 
@@ -32,6 +36,7 @@ State.get()
 console.log("--- identity ---")
 
 const double = x => x * 2
+
 Identity.pure(10).map(double).inspect() |> console.log
 
 console.log("--- Either ---")
@@ -62,3 +67,13 @@ const surround = input =>
 const render = name => greetName(name).flatMap(surround)
 
 render("john doe").run({ greeting: "Hello", surround: "~" }) |> console.log
+
+console.log("--- Maybe with free fmap ---")
+
+Maybe(10)
+  |> fmap(square)
+  |> fmap(square)
+  |> fmap(square)
+  |> fmap(square)
+  |> show
+  |> console.log // Just(100)
